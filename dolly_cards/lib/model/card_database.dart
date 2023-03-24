@@ -4,7 +4,7 @@ import 'package:sqflite/sqflite.dart';
 
 class CardDatabase {
   static final CardDatabase instance = CardDatabase._init();
-
+  static const String schema = 'cards3.db';
   static Database? _database;
 
   CardDatabase._init();
@@ -12,29 +12,28 @@ class CardDatabase {
   Future<Database> get database async {
     if (_database != null) return _database!;
 
-    _database = await _initDB('cards.db');
+    _database = await _initDB(schema);
     return _database!;
   }
 
   Future<Database> _initDB(String filepath) async {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, filepath);
-
-    return await openDatabase(path, version: 1, onCreate: _createDB);
+    print(path);
+    return await openDatabase(path, version: 1, onCreate: _createDB, );
   }
 
   // executed only when the file do not exists
   Future _createDB(Database db, int version) async {
     const idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
     const stringType = 'TEXT NOT NULL';
-    const timestampType = 'DATETIME NOT NULL';
 
     await db.execute('''
     CREATE TABLE $tableCards (
       ${CardFields.id} $idType,
       ${CardFields.name} $stringType,
       ${CardFields.data} $stringType,
-      ${CardFields.timestamp} $timestampType,
+      ${CardFields.timestamp} $stringType
     )
     ''');
   }
@@ -94,7 +93,7 @@ class CardDatabase {
 
   Future close() async {
     final db = await instance.database;
-
-    db.close();
+    _database = null;
+    return db.close();
   }
 }

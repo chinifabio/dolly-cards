@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 
 import '../model/card_database.dart';
 
-class CardDetailWidget extends StatefulWidget {
+class CardDetailPage extends StatefulWidget {
   final int cardId;
 
-  const CardDetailWidget({
+  const CardDetailPage({
     Key? key,
     required this.cardId,
   }) : super(key: key);
@@ -15,7 +15,7 @@ class CardDetailWidget extends StatefulWidget {
   State<StatefulWidget> createState() => _CardDetailState();
 }
 
-class _CardDetailState extends State<CardDetailWidget> {
+class _CardDetailState extends State<CardDetailPage> {
   late CardData cardData;
   bool isLoading = false;
 

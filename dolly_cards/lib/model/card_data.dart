@@ -38,10 +38,10 @@ class CardData {
 
   factory CardData.fromJson(Map<String, dynamic> json) {
     return CardData(
-        id: json['id'] as int?,
-        name: json['name'] as String,
-        data: json['data'] as String,
-        timestamp: DateTime.parse(json['timestamp'] as String)
+        id: json[CardFields.id] as int?,
+        name: json[CardFields.name] as String,
+        data: json[CardFields.data] as String,
+        timestamp: DateTime.parse(json[CardFields.timestamp] as String)
     );
   }
 

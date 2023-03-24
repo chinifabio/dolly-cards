@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/card_list.dart';
-import 'card_reader.dart';
+import '../widgets/card_reader.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -17,24 +17,17 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final tabs = [
     const CardListWidget(),
-    const Center(child: Text('C')),
-    const Center(child: Text('C'))
+    const Center(child: Text('in progress')),
+    const CardReader()
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(widget.title)
       ),
-      body: tabs[_navigationIndex],
-      floatingActionButton: FloatingActionButton(
-        tooltip: 'Read Card',
-        onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder:
-            (context) => const CardReader())
-        ),
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      body: tabs[_navigationIndex], // This trailing comma makes auto-formatting nicer for build methods.
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _navigationIndex,
         items: const [
